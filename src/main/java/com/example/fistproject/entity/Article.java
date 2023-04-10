@@ -1,6 +1,7 @@
 package com.example.fistproject.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor// 디폴트 생성자 추가 어노테이션
 @ToString
+@Getter
 public class Article {
 
     @Id
@@ -24,6 +26,7 @@ public class Article {
 
     @Column
     private String content;
+
 
 
 }

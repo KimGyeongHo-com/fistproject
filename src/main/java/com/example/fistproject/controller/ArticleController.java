@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -44,7 +45,7 @@ public class ArticleController {
         log.info(saved.toString());
         //System.out.println(saved.toString());
 
-        return "";
+        return "redirect:/articles/" + saved.getId();
     }
 
     @GetMapping("/articles/{id}") //id 변수
@@ -57,5 +58,20 @@ public class ArticleController {
         model.addAttribute("article", articleEntity);
         // 3 : 보여줄 페이지 설정(view)
         return "articles/show";
+    }
+
+    @GetMapping("/articles")
+    public String index(Model model){
+        // 1 : 모든 article을 가져온다.
+        List<Article> articleEntityList = articleRepository.findAll();
+        // = IterableList<Article> articleEntityList = articleRepository.findAll();
+
+
+        // 2 : 가져온 article 묶음을 view로 전달
+        model.addAttribute("articleList",articleEntityList);
+
+        // 3: view 페이지를 설정
+
+        return "articles/index"; // articles/index.mustache
     }
 }
